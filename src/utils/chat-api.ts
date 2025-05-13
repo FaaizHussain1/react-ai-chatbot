@@ -8,7 +8,7 @@ export function convertToOpenAIMessages(messages: any[]): any[] {
   }));
 }
 
-export async function chatFetchFunction(api: string, { body }: { body: any }) {
+export async function chatFetchFunction({ body }: { body: any }) {
   const { messages } = JSON.parse(body);
 
   const openaiMessages = convertToOpenAIMessages(messages);
