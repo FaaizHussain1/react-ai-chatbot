@@ -19,7 +19,7 @@ export default function ChatWidget() {
         size="icon"
         className="h-14 w-14 rounded-full fixed bottom-6 right-6 shadow-lg z-50"
       >
-        <img src="./public/assets/logo.png" alt="logo" width={44} height={44} />
+        <img src="/assets/logo.png" alt="logo" width={44} height={44} />
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
