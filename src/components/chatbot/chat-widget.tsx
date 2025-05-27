@@ -23,13 +23,13 @@ export default function ChatWidget() {
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-[425px] md:max-w-[500px] h-[600px] p-0 gap-0">
+        <DialogContent className="sm:max-w-[525px] md:max-w-[600px] h-[600px] p-0 gap-0">
           <DialogHeader className="px-4 py-2 border-b flex flex-row items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
                 <MessageSquare className="h-4 w-4" />
               </div>
-              <DialogTitle>AI Assistant</DialogTitle>
+              <DialogTitle>Virtual Assistant</DialogTitle>
             </div>
           </DialogHeader>
           <div className="flex-1 overflow-hidden h-full">

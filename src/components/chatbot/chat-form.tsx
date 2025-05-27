@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ChangeEvent } from "react";
+
+import type React from "react";
+import type { ChangeEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -41,4 +43,5 @@ const ChatForm: React.FC<ChatFormProps> = ({
     </form>
   );
 };
+
 export default ChatForm;
