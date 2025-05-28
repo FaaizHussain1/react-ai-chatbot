@@ -45,6 +45,11 @@ const INITIAL_OPTIONS: ChatOption[] = [
     text: "I'm not sure — I need general guidance or a consultation",
     value: "guidance",
   },
+  {
+    id: "7",
+    text: "I'm not sure — I need documentation for the list of services you provide",
+    value: "pdf",
+  },
 ];
 
 export default function ChatInterface({ inModal = false }: ChatInterfaceProps) {
@@ -123,11 +128,11 @@ How can I assist you today?
         contextualMessage,
       ]);
 
-      // Add action buttons based on the selection
       const responseWithActions = {
         ...assistantResponse,
-        showEstimateButton: option.value !== "guidance",
-        showConsultationButton: true,
+        showEstimateButton: option.value === "guidance",
+        showConsultationButton: option.value === "pdf" ? false : true,
+        showPDFButton: option.value === "pdf",
       };
 
       setMessages((prevMessages) => [...prevMessages, responseWithActions]);

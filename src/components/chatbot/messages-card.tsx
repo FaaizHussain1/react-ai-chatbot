@@ -21,6 +21,7 @@ interface Message {
   options?: ChatOption[];
   showEstimateButton?: boolean;
   showConsultationButton?: boolean;
+  showPDFButton?: boolean;
 }
 
 interface MessagesCardProps {
@@ -87,6 +88,13 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
           Schedule Free Consultation
         </Button>
       )}
+      {message.showPDFButton && (
+        <a href="/dummy.pdf" download="dummy.pdf" target="_blank">
+          <Button variant="outline" className="flex-1">
+            Download PDF
+          </Button>
+        </a>
+      )}
     </div>
   );
 
@@ -129,7 +137,8 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
                 </div>
                 {message.options && renderOptions(message.options)}
                 {(message.showEstimateButton ||
-                  message.showConsultationButton) &&
+                  message.showConsultationButton ||
+                  message.showPDFButton) &&
                   renderActionButtons(message)}
               </div>
             </div>
