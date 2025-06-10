@@ -56,22 +56,22 @@ const data = {
     },
     {
       title: "AI Agents",
-      url: "/agents",
+      url: "/dashboard/agents",
       icon: Bot,
     },
     {
       title: "Analytics",
-      url: "/analytics",
+      url: "/dashboard/analytics",
       icon: BarChart3,
     },
     {
       title: "Users",
-      url: "/users",
+      url: "/dashboard/users",
       icon: Users,
     },
     {
       title: "Settings",
-      url: "/settings",
+      url: "/dashboard/settings",
       icon: Settings,
     },
   ],

@@ -10,14 +10,15 @@ import { AgentsPage } from "./agents";
 import { AnalyticsPage } from "./analytics";
 import { DashboardPage } from "./dashboard";
 import { UsersPage } from "./users";
+import ChatWidget from "@/components/chatbot/chat-widget";
 
 export default function Main() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<DashboardLayout />}>
-          <Route index element={<Navigate to="/dashboard" replace />} />
-          <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="/" element={<ChatWidget />} />
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="home" element={<DashboardPage />} />
           <Route path="agents" element={<AgentsPage />} />
           <Route path="analytics" element={<AnalyticsPage />} />
           <Route path="agents/:id" element={<AgentDetailsPage />} />
