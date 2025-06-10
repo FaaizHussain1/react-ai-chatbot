@@ -26,7 +26,7 @@ export default function ChatWidget() {
           <DialogHeader className="px-6 py-4 bg-gradient-to-r from-[#02276B] to-[#161139] flex flex-row items-center justify-start border-b gap-3">
             <div className="relative">
               <img
-                src="https://placehold.co/600x600?text=VA"
+                src="https://placehold.co/600x600?text=SciTech"
                 alt="Virtual Assistant Avatar"
                 className="h-12 w-12 rounded-full border-2 border-white/20"
               />
@@ -34,7 +34,7 @@ export default function ChatWidget() {
             </div>
             <div className="flex flex-col">
               <DialogTitle className="text-white text-xl font-medium">
-                Virtual Assistant
+                SciTech Support
               </DialogTitle>
               <p className="text-gray-200 text-sm">Admin Support</p>
             </div>

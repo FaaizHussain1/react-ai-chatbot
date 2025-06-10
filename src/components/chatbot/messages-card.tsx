@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
 
 import { Card } from "@/components/ui/card";
@@ -7,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { User, ArrowRight } from "lucide-react";
 import type React from "react";
 import { useEffect, useRef } from "react";
+import { PopupWidget } from "react-calendly";
 
 interface ChatOption {
   id: string;
@@ -31,6 +33,7 @@ interface MessagesCardProps {
   onOptionSelect?: (option: ChatOption) => void;
   onEstimateRequest?: () => void;
   onConsultationRequest?: () => void;
+  calendlyUrl?: string; // Add Calendly URL prop
 }
 
 const MessagesCard: React.FC<MessagesCardProps> = ({
@@ -39,7 +42,7 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
   messages,
   onOptionSelect,
   onEstimateRequest,
-  onConsultationRequest,
+  calendlyUrl = "https://calendly.com/your-username/consultation", // Default Calendly URL
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -51,6 +54,13 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
 
   const handleOptionClick = (option: ChatOption) => {
     onOptionSelect?.(option);
+  };
+
+  const handleConsultationClick = () => {
+    // @ts-ignore
+    window.Calendly.initPopupWidget({
+      url: calendlyUrl,
+    });
   };
 
   const renderOptions = (options: ChatOption[]) => (
@@ -77,7 +87,7 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
         <Button
           variant="outline"
           onClick={onEstimateRequest}
-          className="flex-1 bg-[#F6A652] text-black rounded-[114px]  h-[52px]"
+          className="flex-1 bg-[#F6A652] text-black rounded-[114px] h-[52px]"
         >
           Get Tailored Estimate
         </Button>
@@ -85,8 +95,8 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
       {message.showConsultationButton && (
         <Button
           variant="outline"
-          onClick={onConsultationRequest}
-          className="flex-1 bg-[#F6A652] text-black rounded-[114px]  h-[52px]"
+          onClick={handleConsultationClick}
+          className="flex-1 bg-[#F6A652] text-black rounded-[114px] h-[52px]"
         >
           Schedule Free Consultation
         </Button>
@@ -118,68 +128,72 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
   );
 
   return (
-    <Card
-      className={cn(
-        "flex-1 p-4 mb-4 overflow-hidden",
-        inModal && "border-0 shadow-none rounded-none"
-      )}
-    >
-      <ScrollArea className="h-full pr-4">
-        <div className="space-y-4 pb-4">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={cn(
-                "flex items-start gap-3 rounded-lg p-4",
-                message.role === "user"
-                  ? "ml-auto max-w-[80%] bg-[#F1F8FA]"
-                  : `mr-auto max-w-[90%] ${
-                      message.id === "welcome"
-                        ? "bg-transparent"
-                        : "bg-[#104D96]"
-                    }`
-              )}
-            >
+    <>
+      <Card
+        className={cn(
+          "flex-1 p-4 mb-4 overflow-hidden",
+          inModal && "border-0 shadow-none rounded-none"
+        )}
+      >
+        <ScrollArea className="h-full pr-4">
+          <div className="space-y-4 pb-4">
+            {messages.map((message) => (
               <div
-                className={
+                key={message.id}
+                className={cn(
+                  "flex items-start gap-3 rounded-lg p-4",
                   message.role === "user"
-                    ? "flex shrink-0 select-none items-center justify-center border rounded-[20px] h-[38px] w-[38px] shadow bg-primary text-primary-foreground"
-                    : "flex shrink-0 select-none items-center justify-center"
-                }
-              >
-                {message.role === "user" ? <User className="h-6 w-6" /> : ""}
-              </div>
-              <div className="flex-1">
-                {message.role === "user" ? (
-                  <div
-                    className={`text-sm whitespace-pre-wrap text-[#104D96] mt-[8px]`}
-                  >
-                    {message.content}
-                  </div>
-                ) : (
-                  <div
-                    className={`text-sm whitespace-pre-wrap ${
-                      message.id === "welcome" ? "text-[#104D96]" : "text-white"
-                    } mt-[8px]`}
-                  >
-                    {message.content}
-                  </div>
+                    ? "ml-auto max-w-[80%] bg-[#F1F8FA]"
+                    : `mr-auto max-w-[90%] ${
+                        message.id === "welcome"
+                          ? "bg-transparent"
+                          : "bg-[#104D96]"
+                      }`
                 )}
-                {message.options && renderOptions(message.options)}
-                {(message.showEstimateButton ||
-                  message.showConsultationButton ||
-                  message.showPDFButton) &&
-                  renderActionButtons(message)}
+              >
+                <div
+                  className={
+                    message.role === "user"
+                      ? "flex shrink-0 select-none items-center justify-center border rounded-[20px] h-[38px] w-[38px] shadow bg-primary text-primary-foreground"
+                      : "flex shrink-0 select-none items-center justify-center"
+                  }
+                >
+                  {message.role === "user" ? <User className="h-6 w-6" /> : ""}
+                </div>
+                <div className="flex-1">
+                  {message.role === "user" ? (
+                    <div
+                      className={`text-sm whitespace-pre-wrap text-[#104D96] mt-[8px]`}
+                    >
+                      {message.content}
+                    </div>
+                  ) : (
+                    <div
+                      className={`text-sm whitespace-pre-wrap ${
+                        message.id === "welcome"
+                          ? "text-[#104D96]"
+                          : "text-white"
+                      } mt-[8px]`}
+                    >
+                      {message.content}
+                    </div>
+                  )}
+                  {message.options && renderOptions(message.options)}
+                  {(message.showEstimateButton ||
+                    message.showConsultationButton ||
+                    message.showPDFButton) &&
+                    renderActionButtons(message)}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
 
-          {status === "streaming" && <TypingIndicator />}
+            {status === "streaming" && <TypingIndicator />}
 
-          <div ref={messagesEndRef} />
-        </div>
-      </ScrollArea>
-    </Card>
+            <div ref={messagesEndRef} />
+          </div>
+        </ScrollArea>
+      </Card>
+    </>
   );
 };
 

@@ -113,6 +113,7 @@ export default function ChatInterface({ inModal = false }: ChatInterfaceProps) {
       }`}
     >
       <MessagesCard
+        calendlyUrl="https://calendly.com/ahussain-digitalauxilius/30min"
         status={status}
         inModal={inModal}
         messages={messages}
