@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Bot, User, ArrowRight } from "lucide-react";
+import { User, ArrowRight } from "lucide-react";
 import type React from "react";
 import { useEffect, useRef } from "react";
 
@@ -25,6 +25,7 @@ interface Message {
 }
 
 interface MessagesCardProps {
+  status: "submitted" | "streaming" | "ready" | "error";
   inModal: boolean;
   messages: Message[];
   onOptionSelect?: (option: ChatOption) => void;
@@ -33,6 +34,7 @@ interface MessagesCardProps {
 }
 
 const MessagesCard: React.FC<MessagesCardProps> = ({
+  status,
   inModal,
   messages,
   onOptionSelect,
@@ -45,7 +47,7 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages]);
+  }, [messages, status]);
 
   const handleOptionClick = (option: ChatOption) => {
     onOptionSelect?.(option);
@@ -56,16 +58,13 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
       {options.map((option) => (
         <Button
           key={option.id}
-          variant="outline"
-          className="justify-start text-left h-auto p-3 whitespace-normal"
+          variant="link"
+          className="justify-start text-left h-auto p-3 whitespace-normal bg-[#104D96]"
           onClick={() => handleOptionClick(option)}
         >
           <span className="flex items-center gap-2 w-full">
-            <span className="text-sm font-medium text-primary">
-              {option.id}.
-            </span>
-            <span className="text-sm flex-1">{option.text}</span>
-            <ArrowRight className="h-4 w-4 opacity-50 flex-shrink-0" />
+            <span className="text-sm flex-1 text-white">{option.text}</span>
+            <ArrowRight className="h-4 w-4 opacity-50 flex-shrink-0 text-white" />
           </span>
         </Button>
       ))}
@@ -75,7 +74,11 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
   const renderActionButtons = (message: Message) => (
     <div className="flex flex-col sm:flex-row gap-2 mt-3">
       {message.showEstimateButton && (
-        <Button onClick={onEstimateRequest} className="flex-1">
+        <Button
+          variant="outline"
+          onClick={onEstimateRequest}
+          className="flex-1 bg-[#F6A652] text-black rounded-[114px]  h-[52px]"
+        >
           Get Tailored Estimate
         </Button>
       )}
@@ -83,18 +86,34 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
         <Button
           variant="outline"
           onClick={onConsultationRequest}
-          className="flex-1"
+          className="flex-1 bg-[#F6A652] text-black rounded-[114px]  h-[52px]"
         >
           Schedule Free Consultation
         </Button>
       )}
       {message.showPDFButton && (
-        <a href="/dummy.pdf" download="dummy.pdf" target="_blank">
+        <a
+          href="/dummy.pdf"
+          download="dummy.pdf"
+          target="_blank"
+          rel="noreferrer"
+        >
           <Button variant="outline" className="flex-1">
             Download PDF
           </Button>
         </a>
       )}
+    </div>
+  );
+
+  const TypingIndicator = () => (
+    <div className="flex items-center gap-2 text-gray-500 text-sm px-4 py-2">
+      <div className="flex gap-1">
+        <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+        <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+        <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"></div>
+      </div>
+      <span>Chatbot is typing...</span>
     </div>
   );
 
@@ -113,28 +132,39 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
               className={cn(
                 "flex items-start gap-3 rounded-lg p-4",
                 message.role === "user"
-                  ? "ml-auto max-w-[80%] bg-muted"
-                  : "mr-auto max-w-[90%] bg-primary/10"
+                  ? "ml-auto max-w-[80%] bg-[#F1F8FA]"
+                  : `mr-auto max-w-[90%] ${
+                      message.id === "welcome"
+                        ? "bg-transparent"
+                        : "bg-[#104D96]"
+                    }`
               )}
             >
               <div
-                className={cn(
-                  "flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow",
+                className={
                   message.role === "user"
-                    ? "bg-background"
-                    : "bg-primary text-primary-foreground"
-                )}
+                    ? "flex shrink-0 select-none items-center justify-center border rounded-[20px] h-[38px] w-[38px] shadow bg-primary text-primary-foreground"
+                    : "flex shrink-0 select-none items-center justify-center"
+                }
               >
-                {message.role === "user" ? (
-                  <User className="h-4 w-4" />
-                ) : (
-                  <Bot className="h-4 w-4" />
-                )}
+                {message.role === "user" ? <User className="h-6 w-6" /> : ""}
               </div>
               <div className="flex-1">
-                <div className="text-sm whitespace-pre-wrap">
-                  {message.content}
-                </div>
+                {message.role === "user" ? (
+                  <div
+                    className={`text-sm whitespace-pre-wrap text-[#104D96] mt-[8px]`}
+                  >
+                    {message.content}
+                  </div>
+                ) : (
+                  <div
+                    className={`text-sm whitespace-pre-wrap ${
+                      message.id === "welcome" ? "text-[#104D96]" : "text-white"
+                    } mt-[8px]`}
+                  >
+                    {message.content}
+                  </div>
+                )}
                 {message.options && renderOptions(message.options)}
                 {(message.showEstimateButton ||
                   message.showConsultationButton ||
@@ -143,6 +173,9 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
               </div>
             </div>
           ))}
+
+          {status === "streaming" && <TypingIndicator />}
+
           <div ref={messagesEndRef} />
         </div>
       </ScrollArea>

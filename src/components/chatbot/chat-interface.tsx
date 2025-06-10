@@ -18,7 +18,7 @@ interface ChatInterfaceProps {
 }
 
 export default function ChatInterface({ inModal = false }: ChatInterfaceProps) {
-  const { messages, input, handleInputChange, setMessages } = useChat({
+  const { messages, input, handleInputChange, setMessages, status } = useChat({
     initialMessages: INITIAL_MESSAGE,
     api: "/api/chat",
     onResponse(response) {
@@ -113,6 +113,7 @@ export default function ChatInterface({ inModal = false }: ChatInterfaceProps) {
       }`}
     >
       <MessagesCard
+        status={status}
         inModal={inModal}
         messages={messages}
         onOptionSelect={handleOptionSelect}

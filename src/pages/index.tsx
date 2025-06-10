@@ -1,10 +1,5 @@
 import { DashboardLayout } from "@/components/dashboard-layout";
-import {
-  Navigate,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { AgentDetailsPage } from "./agent-details";
 import { AgentsPage } from "./agents";
 import { AnalyticsPage } from "./analytics";
