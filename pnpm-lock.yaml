@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@ai-sdk/openai':
         specifier: ^1.3.20
-        version: 1.3.20(zod@3.24.3)
+        version: 1.3.20(zod@3.25.61)
       '@ai-sdk/react':
         specifier: ^1.2.9
-        version: 1.2.9(react@19.1.0)(zod@3.24.3)
+        version: 1.2.9(react@19.1.0)(zod@3.25.61)
       '@radix-ui/react-avatar':
         specifier: ^1.1.10
         version: 1.1.10(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -46,7 +46,7 @@ importers:
         version: 4.1.4(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.2)(lightningcss@1.29.2))
       ai:
         specifier: ^4.3.10
-        version: 4.3.10(react@19.1.0)(zod@3.24.3)
+        version: 4.3.10(react@19.1.0)(zod@3.25.61)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -68,6 +68,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.1.0(react@19.1.0)
+      react-hook-form:
+        specifier: ^7.57.0
+        version: 7.57.0(react@19.1.0)
       react-router-dom:
         specifier: ^7.6.1
         version: 7.6.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -80,10 +83,16 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@4.1.4)
+      zod:
+        specifier: ^3.25.61
+        version: 3.25.61
     devDependencies:
       '@eslint/js':
         specifier: ^9.22.0
         version: 9.25.1
+      '@hookform/resolvers':
+        specifier: ^5.1.1
+        version: 5.1.1(react-hook-form@7.57.0(react@19.1.0))
       '@types/node':
         specifier: ^22.15.3
         version: 22.15.3
@@ -357,6 +366,11 @@ packages:
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
+
+  '@hookform/resolvers@5.1.1':
+    resolution: {integrity: sha512-J/NVING3LMAEvexJkyTLjruSm7aOFx7QX21pzkiJfMoNG0wl5aFEjLTl7ay7IQb9EWY6AkrBy7tHL2Alijpdcg==}
+    peerDependencies:
+      react-hook-form: ^7.55.0
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -975,6 +989,9 @@ packages:
     resolution: {integrity: sha512-ECyOuDeH3C1I8jH2MK1RtBJW+YPMvSfT0a5NN0nHfQYnDSJ6tUiZH3gzwVP5/Kfh/+Tt7tpWVF9LXNTnhTJ3kA==}
     cpu: [x64]
     os: [win32]
+
+  '@standard-schema/utils@0.3.0':
+    resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
 
   '@swc/core-darwin-arm64@1.11.21':
     resolution: {integrity: sha512-v6gjw9YFWvKulCw3ZA1dY+LGMafYzJksm1mD4UZFZ9b36CyHFowYVYug1ajYRIRqEvvfIhHUNV660zTLoVFR8g==}
@@ -1713,6 +1730,12 @@ packages:
     peerDependencies:
       react: ^19.1.0
 
+  react-hook-form@7.57.0:
+    resolution: {integrity: sha512-RbEks3+cbvTP84l/VXGUZ+JMrKOS8ykQCRYdm5aYsxnDquL0vspsyNhGRO7pcH6hsZqWlPOjLye7rJqdtdAmlg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
+
   react-remove-scroll-bar@2.3.8:
     resolution: {integrity: sha512-9r+yi9+mgU33AKcj6IbT9oRCO78WriSj6t/cF8DWBZJ9aOGPOTEDvdUDz1FwKim7QXWwmHqtdHnRJfhAxEG46Q==}
     engines: {node: '>=10'}
@@ -1963,44 +1986,44 @@ packages:
     peerDependencies:
       zod: ^3.24.1
 
-  zod@3.24.3:
-    resolution: {integrity: sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg==}
+  zod@3.25.61:
+    resolution: {integrity: sha512-fzfJgUw78LTNnHujj9re1Ov/JJQkRZZGDMcYqSx7Hp4rPOkKywaFHq0S6GoHeXs0wGNE/sIOutkXgnwzrVOGCQ==}
 
 snapshots:
 
-  '@ai-sdk/openai@1.3.20(zod@3.24.3)':
+  '@ai-sdk/openai@1.3.20(zod@3.25.61)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.7(zod@3.24.3)
-      zod: 3.24.3
+      '@ai-sdk/provider-utils': 2.2.7(zod@3.25.61)
+      zod: 3.25.61
 
-  '@ai-sdk/provider-utils@2.2.7(zod@3.24.3)':
+  '@ai-sdk/provider-utils@2.2.7(zod@3.25.61)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
       nanoid: 3.3.11
       secure-json-parse: 2.7.0
-      zod: 3.24.3
+      zod: 3.25.61
 
   '@ai-sdk/provider@1.1.3':
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@1.2.9(react@19.1.0)(zod@3.24.3)':
+  '@ai-sdk/react@1.2.9(react@19.1.0)(zod@3.25.61)':
     dependencies:
-      '@ai-sdk/provider-utils': 2.2.7(zod@3.24.3)
-      '@ai-sdk/ui-utils': 1.2.8(zod@3.24.3)
+      '@ai-sdk/provider-utils': 2.2.7(zod@3.25.61)
+      '@ai-sdk/ui-utils': 1.2.8(zod@3.25.61)
       react: 19.1.0
       swr: 2.3.3(react@19.1.0)
       throttleit: 2.1.0
     optionalDependencies:
-      zod: 3.24.3
+      zod: 3.25.61
 
-  '@ai-sdk/ui-utils@1.2.8(zod@3.24.3)':
+  '@ai-sdk/ui-utils@1.2.8(zod@3.25.61)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.7(zod@3.24.3)
-      zod: 3.24.3
-      zod-to-json-schema: 3.24.5(zod@3.24.3)
+      '@ai-sdk/provider-utils': 2.2.7(zod@3.25.61)
+      zod: 3.25.61
+      zod-to-json-schema: 3.24.5(zod@3.25.61)
 
   '@esbuild/aix-ppc64@0.25.3':
     optional: true
@@ -2137,6 +2160,11 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
 
   '@floating-ui/utils@0.2.9': {}
+
+  '@hookform/resolvers@5.1.1(react-hook-form@7.57.0(react@19.1.0))':
+    dependencies:
+      '@standard-schema/utils': 0.3.0
+      react-hook-form: 7.57.0(react@19.1.0)
 
   '@humanfs/core@0.19.1': {}
 
@@ -2684,6 +2712,8 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.40.1':
     optional: true
 
+  '@standard-schema/utils@0.3.0': {}
+
   '@swc/core-darwin-arm64@1.11.21':
     optional: true
 
@@ -2909,15 +2939,15 @@ snapshots:
 
   acorn@8.14.1: {}
 
-  ai@4.3.10(react@19.1.0)(zod@3.24.3):
+  ai@4.3.10(react@19.1.0)(zod@3.25.61):
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.7(zod@3.24.3)
-      '@ai-sdk/react': 1.2.9(react@19.1.0)(zod@3.24.3)
-      '@ai-sdk/ui-utils': 1.2.8(zod@3.24.3)
+      '@ai-sdk/provider-utils': 2.2.7(zod@3.25.61)
+      '@ai-sdk/react': 1.2.9(react@19.1.0)(zod@3.25.61)
+      '@ai-sdk/ui-utils': 1.2.8(zod@3.25.61)
       '@opentelemetry/api': 1.9.0
       jsondiffpatch: 0.6.0
-      zod: 3.24.3
+      zod: 3.25.61
     optionalDependencies:
       react: 19.1.0
 
@@ -3369,6 +3399,10 @@ snapshots:
       react: 19.1.0
       scheduler: 0.26.0
 
+  react-hook-form@7.57.0(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+
   react-remove-scroll-bar@2.3.8(@types/react@19.1.2)(react@19.1.0):
     dependencies:
       react: 19.1.0
@@ -3566,8 +3600,8 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod-to-json-schema@3.24.5(zod@3.24.3):
+  zod-to-json-schema@3.24.5(zod@3.25.61):
     dependencies:
-      zod: 3.24.3
+      zod: 3.25.61
 
-  zod@3.24.3: {}
+  zod@3.25.61: {}
