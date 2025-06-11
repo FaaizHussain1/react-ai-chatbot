@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { User, ArrowRight } from "lucide-react";
+import { ArrowRight, User } from "lucide-react";
 import type React from "react";
 import { useEffect, useRef } from "react";
-import { PopupWidget } from "react-calendly";
+import { PopupButton } from "react-calendly";
 
 interface ChatOption {
   id: string;
@@ -56,13 +56,6 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
     onOptionSelect?.(option);
   };
 
-  const handleConsultationClick = () => {
-    // @ts-ignore
-    window.Calendly.initPopupWidget({
-      url: calendlyUrl,
-    });
-  };
-
   const renderOptions = (options: ChatOption[]) => (
     <div className="flex flex-col gap-2 mt-3">
       {options.map((option) => (
@@ -82,7 +75,7 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
   );
 
   const renderActionButtons = (message: Message) => (
-    <div className="flex flex-col sm:flex-row gap-2 mt-3">
+    <div className="flex flex-col sm:flex-row gap-2 mt-3" id="action-buttons">
       {message.showEstimateButton && (
         <Button
           variant="outline"
@@ -93,13 +86,14 @@ const MessagesCard: React.FC<MessagesCardProps> = ({
         </Button>
       )}
       {message.showConsultationButton && (
-        <Button
-          variant="outline"
-          onClick={handleConsultationClick}
+        <PopupButton
+          url={calendlyUrl}
+          rootElement={
+            document.getElementById("action-buttons") || document.body
+          }
+          text="Schedule Consultation"
           className="flex-1 bg-[#F6A652] text-black rounded-[114px] h-[52px]"
-        >
-          Schedule Free Consultation
-        </Button>
+        />
       )}
       {message.showPDFButton && (
         <a
